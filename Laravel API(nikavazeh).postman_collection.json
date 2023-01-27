@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "26a74b4d-db3e-42d6-9862-12879f24e2fa",
+		"name": "Laravel API(nikavazeh)",
+		"description": "You can't use any email because the email service provider doesn't support all eamil before improve your account to permium.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14619669"
+	},
+	"item": [
+		{
+			"name": "get_otp_token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "mya.ronin@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/get_otp_token",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"get_otp_token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_auth_token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "mya.ronin@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "6868",
+							"type": "text"
+						},
+						{
+							"key": "device_name",
+							"value": "firefox",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/get_auth_token",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"get_auth_token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get countreis",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|y5moPbpIabIHkSODMgt9d800ngetg3XVdwoYDof5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/country/list?name=germany&order=population&sort=asc",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"country",
+						"list"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "germany"
+						},
+						{
+							"key": "order",
+							"value": "population"
+						},
+						{
+							"key": "sort",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://api.mostafayavari.ir",
+			"type": "string"
+		}
+	]
+}
