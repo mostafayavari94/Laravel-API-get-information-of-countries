@@ -46,12 +46,12 @@ return [
         ],
         
         'mailtrap' => [
-            'transport' => 'smtp',
-            'host' => 'send.smtp.mailtrap.io',
-            'port' => 587,
-            'encryption' => 'tls',
-            'username' => 'api',
-            'password' => 'cdfa4f15e6b575ab89b8dc12159f4f7b',
+            'transport' => env('MAILTRAP_MAIL_MAILER'),
+            'host' => env('MAILTRAP_MAIL_HOST'),
+            'port' => env('MAILTRAP_MAIL_PORT'),
+            'encryption' => env('MAILTRAP_MAIL_ENCRYPTION'),
+            'username' => env('MAILTRAP_MAIL_USERNAME'),
+            'password' => env('MAILTRAP_MAIL_PASSWORD'),
             'timeout' => null,
         ],
 
