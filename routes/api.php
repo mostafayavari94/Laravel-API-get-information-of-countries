@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CountryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('get_otp_token', [AuthController::class, 'getOTPToken'])->name("get.token");
 Route::post('get_auth_token', [AuthController::class, 'getAuthToken'])->name("validate.token");
+
+Route::prefix('country')->middleware(['auth:sanctum'])->group(function () {
+    Route::get('/list', [CountryController::class, 'getCountreis'])->name('country.list');
+});
