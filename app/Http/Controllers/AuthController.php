@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
 use App\Classes\Otp;
-use App\Classes\MailgunEmailDrive;
+use App\Classes\MailtrapEmailDrive;
 
 class AuthController extends Controller
 {
@@ -23,7 +23,7 @@ class AuthController extends Controller
             ]);
 
             $otp = new Otp();
-            $otp->sendVerifyEmail($user, new MailgunEmailDrive());
+            $otp->sendVerifyEmail($user, new MailtrapEmailDrive());
 
             DB::commit();
 

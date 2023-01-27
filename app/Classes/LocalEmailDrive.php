@@ -10,8 +10,8 @@ use App\Mail\SendActiveCode;
 class LocalEmailDrive  implements IEmailDrive
 {
     function __construct(){
-        Config::set('local.mail', 'mandrill');
-        (new Illuminate\Mail\MailServiceProvider(app()))->register();   
+        // Config::set('local.mail', 'mandrill');
+        // (new Illuminate\Mail\MailServiceProvider(app()))->register();   
     }
     public function sendVerifyEmail($email_address, $token, ...$data)
     {

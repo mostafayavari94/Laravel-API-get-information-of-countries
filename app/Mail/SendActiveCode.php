@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
@@ -16,14 +17,17 @@ class SendActiveCode extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     private $token;
+    private $cfrom;
+    
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(String $token)
+    public function __construct(String $token, String $from)
     {
         $this->token = $token;
+        $this->cfrom = $from;
     }
 
     /**
@@ -34,6 +38,7 @@ class SendActiveCode extends Mailable implements ShouldQueue
     public function envelope()
     {
         return new Envelope(
+            from: new Address($this->cfrom, env('MAIL_FROM_NAME')),
             subject: 'Send Active Code',
         );
     }
