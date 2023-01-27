@@ -15,7 +15,7 @@ class MailtrapEmailDrive  implements IEmailDrive
     {
         Mail::mailer('mailtrap')
         ->to($email_address)
-        ->queue(new SendActiveCode($token, 'mailtrap@mostafayavari.ir'));
+        ->queue(new SendActiveCode($token, env('MAILTRAP_MAIL_FROM_ADDRESS')));
     }
 
     public function sendEmail()
