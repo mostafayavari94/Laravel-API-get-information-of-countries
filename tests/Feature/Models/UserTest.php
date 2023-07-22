@@ -16,18 +16,17 @@ class UserTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic feature test example.
-     *
      * @return void
      */
-    public function testInserUser()
+    public function test_insert_user(): void
     {
         $user = User::factory()->create();
+        $this->assertCount(1,User::all());
         $this->assertModelExists($user);
-        
+
     }
 
-    public function testUserRelationWithToken()
+    public function test_user_relation_with_token()
     {
         $user = User::factory()
         ->hasOtpTokens(1)

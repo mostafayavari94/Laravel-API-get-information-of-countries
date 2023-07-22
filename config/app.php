@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
+    'mailtrap_mail_from_address' => env('MAILTRAP_MAIL_FROM_ADDRESS', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

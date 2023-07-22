@@ -25,5 +25,5 @@ Route::post('get_otp_token', [AuthController::class, 'getOTPToken'])->name("get.
 Route::post('get_auth_token', [AuthController::class, 'getAuthToken'])->name("validate.token");
 
 Route::prefix('country')->middleware(['auth:sanctum'])->group(function () {
-    Route::get('/list', [CountryController::class, 'getCountreis'])->name('country.list');
+    Route::get('/list', [CountryController::class, 'getCountries'])->name('country.list');
 });

@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Classes\Otp;
 use App\Models\User;
 use DB;
-use App\Classes\Otp;
-use App\Classes\MailtrapEmailDrive;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function getOTPToken(Request $request)
+    public function getOTPToken(Request $request, Otp $otp)
     {
         $request->validate([
             'email' => 'required|email:rfc,dns',
@@ -22,8 +21,7 @@ class AuthController extends Controller
                 'email' => $request->email
             ]);
 
-            $otp = new Otp();
-            $otp->sendVerifyEmail($user, new MailtrapEmailDrive());
+            $otp->sendVerifyEmail($user);
 
             DB::commit();
 
@@ -39,8 +37,7 @@ class AuthController extends Controller
     }
 
 
-
-    public function getAuthToken(Request $request)
+    public function getAuthToken(Request $request, Otp $otp)
     {
         $request->validate([
             'email' => 'required|email:rfc,dns',
@@ -50,15 +47,15 @@ class AuthController extends Controller
 
         try {
             $user = User::where('email', $request->email)->firstOrFail();
-            $otp = new Otp();
-            $verification_status = $otp->checkToken($user, $request->token);
+
+            $otp->checkToken($user, $request->token);
 
             $user->tokens()->delete();
             $token = $user->createToken($request->device_name)->plainTextToken;
 
             return response()->json([
-                        'token' => $token,
-                    ]);
+                'token' => $token,
+            ]);
         } catch (\Throwable $th) {
             return show_message($th, __("messages.invalid_verification_code_entered"));
         }

@@ -9,7 +9,7 @@ use App\Mail\SendActiveCode;
 
 class MailgunEmailDrive  implements IEmailDrive
 {
-    public function sendVerifyEmail($email_address, $token, ...$data)
+    public function sendVerifyEmail($email_address, $token, ...$data): void
     {
         Mail::to($email_address)
             ->queue(new SendActiveCode($token));
@@ -17,6 +17,6 @@ class MailgunEmailDrive  implements IEmailDrive
 
     public function sendEmail()
     {
-        // should implement 
+        // should implement
     }
 }

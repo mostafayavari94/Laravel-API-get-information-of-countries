@@ -10,19 +10,15 @@ use Carbon\Carbon;
 class Otp
 {
     private $token;
+    private IEmailDrive $driver;
 
-    function __construct() {
-        // $this->token = $this->generateToken();
+    function __construct(IEmailDrive $drive)
+    {
+        $this->driver = $drive;
     }
 
-    private function generateToken()
+    public function sendVerifyEmail(User $user, IEmailDrive $driver = null): void
     {
-        $this->token = rand(1999, 9999);
-    }
-
-    public function sendVerifyEmail(User $user, IEmailDrive $driver)
-    {
-        
         $user->otpTokens()->delete();
         $this->generateToken();
         $token = new Token();
@@ -31,10 +27,18 @@ class Otp
         $token->expires_at = Carbon::now()->addHour(1)->format('Y-m-d H:i:s');
         $token->save();
 
-        $driver->sendVerifyEmail($user->email, $this->token);
-    }    
+        if ($driver)
+            $driver->sendVerifyEmail($user->email, $this->token);
+        else
+            $this->driver->sendVerifyEmail($user->email, $this->token);
+    }
 
-    public function checkToken(User $user, $token)
+    private function generateToken(): void
+    {
+        $this->token = rand(1999, 9999);
+    }
+
+    public function checkToken(User $user, $token): void
     {
         $user->otpTokens()->where("token", $token)->whereDate('expires_at', '<', Carbon::now()->format('Y-m-d H:i:s'))->firstOrFail();
         $user->otpTokens()->delete();
