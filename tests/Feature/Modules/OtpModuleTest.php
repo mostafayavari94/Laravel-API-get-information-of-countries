@@ -7,8 +7,10 @@ use App\Classes\RandomGenerator;
 use App\Interfaces\IEmailDrive;
 use App\Models\Token;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
+use PharIo\Manifest\InvalidEmailException;
 use Tests\TestCase;
 
 class OtpModuleTest extends TestCase
@@ -82,4 +84,17 @@ class OtpModuleTest extends TestCase
         $this->assertDatabaseEmpty(Token::class);
 
     }
+
+    /**
+     * @return void
+     */
+    public function test_Otp_class_check_token_exception() : void
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        (new Otp($this->createMock(IEmailDrive::class), new RandomGenerator()))->checkToken(new User(), 'fake');
+
+    }
+
+
 }
