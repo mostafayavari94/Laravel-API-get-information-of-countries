@@ -13,6 +13,7 @@ class MailtrapEmailDrive  implements IEmailDrive
 
     public function sendVerifyEmail($email_address, $token, ...$data): void
     {
+
         Mail::mailer('mailtrap')
         ->to($email_address)
         ->queue(new SendActiveCode($token, Config::get('app.mailtrap_mail_from_address')));

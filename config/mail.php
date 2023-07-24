@@ -44,14 +44,14 @@ return [
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
-        
+
         'mailtrap' => [
-            'transport' => env('MAILTRAP_MAIL_MAILER'),
-            'host' => env('MAILTRAP_MAIL_HOST'),
-            'port' => env('MAILTRAP_MAIL_PORT'),
-            'encryption' => env('MAILTRAP_MAIL_ENCRYPTION'),
-            'username' => env('MAILTRAP_MAIL_USERNAME'),
-            'password' => env('MAILTRAP_MAIL_PASSWORD'),
+            'transport' => env('MAILTRAP_MAIL_MAILER', 'smtp'),
+            'host' => env('MAILTRAP_MAIL_HOST', ''),
+            'port' => env('MAILTRAP_MAIL_PORT', ''),
+            'encryption' => env('MAILTRAP_MAIL_ENCRYPTION', 'tls'),
+            'username' => env('MAILTRAP_MAIL_USERNAME', ''),
+            'password' => env('MAILTRAP_MAIL_PASSWORD', ''),
             'timeout' => null,
         ],
 

@@ -62,8 +62,6 @@ class AuthTest extends TestCase
     public function test_get_otp_token($email): void
     {
 
-        $this->withoutExceptionHandling();
-
         $this->instance(
             Otp::class,
             Mockery::mock(Otp::class, function (MockInterface $mock) use ($email) {

@@ -18,7 +18,7 @@ class SendActiveCode extends Mailable implements ShouldQueue
 
     private $token;
     private $cfrom;
-    
+
     /**
      * Create a new message instance.
      *
@@ -66,5 +66,10 @@ class SendActiveCode extends Mailable implements ShouldQueue
     public function attachments()
     {
         return [];
+    }
+
+    public function getToken()
+    {
+        return $this->token;
     }
 }

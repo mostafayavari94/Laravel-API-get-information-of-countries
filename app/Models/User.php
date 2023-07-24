@@ -45,7 +45,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get all of the token for the User
+     * Get all the token for the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
