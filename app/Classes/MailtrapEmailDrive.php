@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendActiveCode;
 use PharIo\Manifest\InvalidEmailException;
 
+
 class MailtrapEmailDrive  implements IEmailDrive
 {
 
